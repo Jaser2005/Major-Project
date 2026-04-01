@@ -35,7 +35,7 @@ col1, col2 = st.columns(2)
 
 with col1:
     age = st.slider("Age", 20, 100, 30)
-     gender_label = st.selectbox("Gender", ["Male", "Female"])
+     gender_label = st.selectbox("Gender", ["Female", "Male"])
      gender = 1 if gender_label == "Female" else 2  # mapping  
     height = st.slider("Height (cm)", 100, 220, 170)
     weight = st.slider("Weight (kg)", 30, 150, 70)
