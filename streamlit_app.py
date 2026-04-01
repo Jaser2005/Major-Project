@@ -69,7 +69,7 @@ if st.button("🔍 Predict Risk"):
         "ap_hi": ap_hi,
         "ap_lo": ap_lo,
         "cholesterol": cholesterol,
-        "glucose": glucose,
+        "gluc": gluc,
         "smoke": smoke,
         "alco": alco,
         "active": active
