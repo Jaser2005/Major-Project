@@ -33,26 +33,33 @@ st.write("### Enter Patient Clinical Details")
 # --- Input Section ---
 col1, col2 = st.columns(2)
 
+col1, col2 = st.columns(2)
+
 with col1:
     age = st.slider("Age", 20, 100, 30)
-     gender_label = st.selectbox("Gender", ["Female", "Male"])
-     gender = 1 if gender_label == "Female" else 2  # mapping  
+    
+    gender_label = st.selectbox("Gender", ["Female", "Male"])
+    gender = 1 if gender_label == "Female" else 2  # mapping
+
     height = st.slider("Height (cm)", 100, 220, 170)
     weight = st.slider("Weight (kg)", 30, 150, 70)
+
     ap_hi = st.slider("Systolic BP (ap_hi)", 80, 200, 120)
     ap_lo = st.slider("Diastolic BP (ap_lo)", 50, 150, 80)
 
 with col2:
     cholesterol = st.selectbox("Cholesterol Level", [1, 2, 3])
     glucose = st.selectbox("Glucose Level", [1, 2, 3])
+
     smoke = st.selectbox("Smoking", [0, 1])
     alco = st.selectbox("Alcohol Intake", [0, 1])
     active = st.selectbox("Physical Activity", [0, 1])
 
-# --- Prediction Button ---
+# -------------------------------
+# Prediction
+# -------------------------------
 if st.button("🔍 Predict Risk"):
 
-    # Create DataFrame (IMPORTANT: order must match training)
     input_df = pd.DataFrame([{
         "age": age,
         "gender": gender,
@@ -67,14 +74,16 @@ if st.button("🔍 Predict Risk"):
         "active": active
     }])
 
-    # Scaling
+    # Scale input
     input_scaled = scaler.transform(input_df)
 
-    # Prediction
+    # Predict
     prediction = model.predict(input_scaled)[0]
     probability = model.predict_proba(input_scaled)[0][1]
 
+    # -------------------------------
     # Output
+    # -------------------------------
     st.subheader("Prediction Result")
 
     if prediction == 1:
@@ -82,7 +91,9 @@ if st.button("🔍 Predict Risk"):
     else:
         st.success(f"✅ LOW RISK of Heart Disease\nProbability: {probability:.2f}")
 
-    # --- Health Insights ---
+    # -------------------------------
+    # Health Insights
+    # -------------------------------
     st.subheader("Health Insights")
 
     if ap_hi > 140:
@@ -99,3 +110,5 @@ if st.button("🔍 Predict Risk"):
 
     if active == 0:
         st.warning("⚠️ Low Physical Activity detected!")
+    
+   
