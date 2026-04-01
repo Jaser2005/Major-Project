@@ -16,8 +16,8 @@ h1 {
 </style>
 """, unsafe_allow_html=True)
 
-model = pickle.load(open("model.pkl", "wb"))
-scaler = pickle.load(open("scaler.pkl", "wb"))
+model = pickle.load(open("model.pkl", "rb"))
+scaler = pickle.load(open("scaler.pkl", "rb"))
 
 # Page config
 st.set_page_config(page_title="Heart Disease Predictor", layout="centered")
