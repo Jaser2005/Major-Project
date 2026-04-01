@@ -35,45 +35,66 @@ col1, col2 = st.columns(2)
 
 with col1:
     age = st.slider("Age", 20, 100, 30)
-    sex = st.selectbox("Sex", ["Female", "Male"])
-    smoke = st.selectbox("Smoking", ["No", "Yes"])
-    bmi = st.slider("BMI", 10.0, 50.0, 22.0)
+    gender = st.selectbox("Gender", [1, 2])  # 1 = Female, 2 = Male
+    height = st.slider("Height (cm)", 100, 220, 170)
+    weight = st.slider("Weight (kg)", 30, 150, 70)
+    ap_hi = st.slider("Systolic BP (ap_hi)", 80, 200, 120)
+    ap_lo = st.slider("Diastolic BP (ap_lo)", 50, 150, 80)
 
 with col2:
-    bp = st.slider("Systolic BP", 80, 200, 120)
-    chol = st.slider("Cholesterol", 100, 400, 200)
-    glucose = st.slider("Glucose", 70, 300, 100)
-    heart_rate = st.slider("Heart Rate", 40, 180, 75)
+    cholesterol = st.selectbox("Cholesterol Level", [1, 2, 3])
+    glucose = st.selectbox("Glucose Level", [1, 2, 3])
+    smoke = st.selectbox("Smoking", [0, 1])
+    alco = st.selectbox("Alcohol Intake", [0, 1])
+    active = st.selectbox("Physical Activity", [0, 1])
 
-# Convert categorical
-sex = 1 if sex == "Male" else 0
-smoke = 1 if smoke == "Yes" else 0
-
-# --- Prediction ---
+# --- Prediction Button ---
 if st.button("🔍 Predict Risk"):
 
-    input_data = np.array([[age, sex, bp, chol, glucose, smoke, bmi, heart_rate]])
-    input_scaled = scaler.transform(input_data)
+    # Create DataFrame (IMPORTANT: order must match training)
+    input_df = pd.DataFrame([{
+        "age": age,
+        "gender": gender,
+        "height": height,
+        "weight": weight,
+        "ap_hi": ap_hi,
+        "ap_lo": ap_lo,
+        "cholesterol": cholesterol,
+        "glucose": glucose,
+        "smoke": smoke,
+        "alco": alco,
+        "active": active
+    }])
 
+    # Scaling
+    input_scaled = scaler.transform(input_df)
+
+    # Prediction
     prediction = model.predict(input_scaled)[0]
     probability = model.predict_proba(input_scaled)[0][1]
 
+    # Output
     st.subheader("Prediction Result")
 
     if prediction == 1:
-        st.error(f"⚠️ HIGH RISK of Heart Disease in 10 Years\nProbability: {probability:.2f}")
+        st.error(f"⚠️ HIGH RISK of Heart Disease\nProbability: {probability:.2f}")
     else:
         st.success(f"✅ LOW RISK of Heart Disease\nProbability: {probability:.2f}")
 
-    # --- Smart Insights ---
+    # --- Health Insights ---
     st.subheader("Health Insights")
 
-    if bp > 140:
-        st.warning("High Blood Pressure detected!")
+    if ap_hi > 140:
+        st.warning("⚠️ High Systolic Blood Pressure detected!")
 
-    if chol > 240:
-        st.warning("High Cholesterol detected!")
+    if ap_lo > 90:
+        st.warning("⚠️ High Diastolic Blood Pressure detected!")
 
-    if bmi > 30:
-        st.warning("Obesity risk detected!")
+    if cholesterol == 3:
+        st.warning("⚠️ High Cholesterol level!")
 
+    if glucose == 3:
+        st.warning("⚠️ High Glucose level!")
+
+    if active == 0:
+        st.warning("⚠️ Low Physical Activity detected!")
