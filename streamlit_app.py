@@ -35,7 +35,7 @@ col1, col2 = st.columns(2)
 
 with col1:
     age = st.slider("Age", 20, 100, 30)
-    gender = st.selectbox("Gender", [1, 2])  # 1 = Female, 2 = Male
+    gender = st.selectbox("Gender", [Male, Female])  
     height = st.slider("Height (cm)", 100, 220, 170)
     weight = st.slider("Weight (kg)", 30, 150, 70)
     ap_hi = st.slider("Systolic BP (ap_hi)", 80, 200, 120)
