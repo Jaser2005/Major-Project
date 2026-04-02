@@ -75,7 +75,7 @@ if st.button("🔍 Predict Risk"):
     "active": active
 }])
 
-input_df = input_df[[
+    input_df = input_df[[
     "age", "gender", "height", "weight",
     "ap_hi", "ap_lo", "cholesterol",
     "gluc", "smoke", "alco", "active"
