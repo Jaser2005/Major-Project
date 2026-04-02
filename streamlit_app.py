@@ -83,6 +83,7 @@ input_df = input_df[[
 
     # Scale input
     input_scaled = scaler.transform(input_df)
+    prediction = model.predict(input_scaled)[0]
 
     # Predict
     prediction = model.predict(input_scaled)[0]
