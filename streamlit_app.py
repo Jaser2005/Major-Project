@@ -62,18 +62,24 @@ with col2:
 if st.button("🔍 Predict Risk"):
 
     input_df = pd.DataFrame([{
-        "age": age,
-        "gender": gender,
-        "height": height,
-        "weight": weight,
-        "ap_hi": ap_hi,
-        "ap_lo": ap_lo,
-        "cholesterol": cholesterol,
-        "gluc": glucose,
-        "smoke": smoke,
-        "alco": alco,
-        "active": active
-    }])
+    "age": age,
+    "gender": gender,
+    "height": height,
+    "weight": weight,
+    "ap_hi": ap_hi,
+    "ap_lo": ap_lo,
+    "cholesterol": cholesterol,
+    "gluc": glucose,   
+    "smoke": smoke,
+    "alco": alco,
+    "active": active
+}])
+
+input_df = input_df[[
+    "age", "gender", "height", "weight",
+    "ap_hi", "ap_lo", "cholesterol",
+    "gluc", "smoke", "alco", "active"
+]]
 
     # Scale input
     input_scaled = scaler.transform(input_df)
