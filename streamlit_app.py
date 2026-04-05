@@ -76,11 +76,7 @@ if st.button("🔍 Predict Risk"):
     "active": active
 }])
 
-    input_df = input_df[[
-    "age", "gender", "height", "weight",
-    "ap_hi", "ap_lo", "cholesterol",
-    "gluc", "smoke", "alco", "active"
-]]
+    input_df = input_df.reindex(columns=features, fill_value=0)
 
     # Scale input
     input_scaled = scaler.transform(input_df)
