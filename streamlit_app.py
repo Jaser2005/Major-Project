@@ -110,7 +110,7 @@ if st.button("🔍 Predict Risk"):
     if cholesterol == 3:
         st.warning("⚠️ High Cholesterol level!")
 
-    if gluc == 3:
+    if glucose == 3:
         st.warning("⚠️ High Glucose level!")
 
     if active == 0:
