@@ -16,16 +16,13 @@ h1 {
 </style>
 """, unsafe_allow_html=True)
 
+# Load Model
 model = pickle.load(open("model.pkl", "rb"))
 scaler = pickle.load(open("scaler.pkl", "rb"))
 features = pickle.load(open("features.pkl", "rb"))
 
 # Page config
 st.set_page_config(page_title="Heart Disease Predictor", layout="centered")
-
-# Load model
-model = pickle.load(open("model.pkl", "rb"))
-scaler = pickle.load(open("scaler.pkl", "rb"))
 
 # Title
 st.markdown("<h1 style='text-align: center; color: red;'>💓 Heart Disease 10-Year Risk Predictor</h1>", unsafe_allow_html=True)
